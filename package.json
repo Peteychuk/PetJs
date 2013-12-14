@@ -1,0 +1,27 @@
+﻿{
+    "name": "PetJS",
+    "version": "1.0.0",
+    "description": "This library is designed to develop (full) ajax application",
+    "homepage": "http://petframework.peteychuk.com/",
+    "author": "Yaroslav Peteychuk",
+    "license": "GPL/MIT",
+    "readmeFilename": "readme.txt",
+    "main": "pet.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Peteychuk/PetJS.git"
+    },
+    "keywords": [
+        "javascript",
+        "ajax",
+        "full ajax",
+        "ajax framework",
+        "html5 history api",
+        "popstate",
+        "pushstate",
+        "replacestate",
+        "history",
+        "html5",
+        "peteychuk"
+    ]
+}
