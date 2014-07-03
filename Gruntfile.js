@@ -8,12 +8,12 @@ module.exports = function(grunt) {
 \n\
 /**\
 *\
-* PetJS - router of ajax applications, HTML5 history API expansion for browsers who not supporting it\n\
+* petjs - router of ajax applications, HTML5 history API expansion for browsers who not supporting it\n\
 *\n\
 * @author     Yaroslav Peteychuk <http://www.peteychuk.com/>, <peteychuk@gmail.com>\n\
-* @homepage   https://github.com/Peteychuk/PetJS\n\
+* @homepage   https://github.com/peteychuk/petjs\n\
 * @copyright  2012-2014 by Peteychuk\n\
-* @version    0.1.0\n\
+* @version    0.1.3\n\
 * @update     03-07-2014\n\
 * @includes   HistoryAPI 4.0.2 (c) 2011-2013 by Dmitrii Pakhtinov\n\
 *\n\
