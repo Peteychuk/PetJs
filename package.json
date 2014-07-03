@@ -1,27 +1,36 @@
-﻿{
-    "name": "PetJS",
-    "version": "1.0.0",
-    "description": "This library is designed to develop (full) ajax application",
-    "homepage": "http://petframework.peteychuk.com/",
-    "author": "Yaroslav Peteychuk",
-    "license": "GPL/MIT",
-    "readmeFilename": "readme.txt",
-    "main": "pet.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Peteychuk/PetJS.git"
-    },
-    "keywords": [
-        "javascript",
-        "ajax",
-        "full ajax",
-        "ajax framework",
-        "html5 history api",
-        "popstate",
-        "pushstate",
-        "replacestate",
-        "history",
-        "html5",
-        "peteychuk"
-    ]
+{
+  "name": "PetJS",
+  "version": "0.1.0",
+  "description": "Router of ajax applications, HTML5 history API expansion for browsers who not supporting it",
+  "homepage": "https://github.com/Peteychuk/PetJS",
+  "author": {
+    "name": "Yaroslav Peteychuk",
+    "url": "http://www.peteychuk.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/Peteychuk/PetJS/issues"
+  },
+  "license": "GPL/MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Peteychuk/PetJS.git"
+  },
+  "keywords": [
+    "javascript",
+    "ajax",
+    "full ajax",
+    "ajax framework",
+    "html5 history api",
+    "popstate",
+    "pushstate",
+    "replacestate",
+    "history",
+    "html5",
+    "peteychuk",
+    "ajax router"
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-uglify": "~0.5.0"
+  }
 }

@@ -1,0 +1,21 @@
+{
+    "name": "PetJS",
+    "version": "0.1.0",
+    "homepage": "https://github.com/Peteychuk/PetJS",
+    "author": {
+        "name": "Yaroslav Peteychuk",
+        "url": "http://www.peteychuk.com/"
+    },
+    "description": "Router of ajax applications, HTML5 history API expansion for browsers who not supporting it",
+    "main": "pet.min.js",
+    "scripts": ["history.js"],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Peteychuk/PetJS.git"
+    },
+    "licenses": [{
+        "type": "GPL3"
+    }, {
+        "type": "MIT"
+    }]
+}

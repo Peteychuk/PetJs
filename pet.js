@@ -1,12 +1,12 @@
 ﻿/**
  *
- * PetJS - This library is designed to develop (full) ajax application
+ * PetJS - router of ajax applications, HTML5 history API expansion for browsers who not supporting it
  *
  * @author     Yaroslav Peteychuk <http://www.peteychuk.com/>, <peteychuk@gmail.com>
- * @url        http://petframework.peteychuk.com/
- * @copyright  2012-2013 by Peteychuk
- * @version    1.0.0
- * @update     14-12-2013
+ * @homepage   https://github.com/Peteychuk/PetJS
+ * @copyright  2012-2014 by Peteychuk
+ * @version    0.1.0
+ * @update     03-07-2014
  * @includes   HistoryAPI 4.0.2 (c) 2011-2013 by Dmitrii Pakhtinov
  *
  * Dual licensed under the MIT and GPL licenses:
@@ -28,7 +28,7 @@
 (function(window, undefined)
 {
     "use strict";
-    
+
     /**
      *
      *
@@ -37,7 +37,7 @@
      */
     var pet = window.pet = (function()
     {
-        var _public = {};
+        var _public = {}; // this;
         var _private =  {};
         var _pet = _private;
 
@@ -53,26 +53,19 @@
             lastQuery: {},
             breakRequest: {
                 lastLocation: '',
-                breakTo: false
+                breakTo: ''
             },
             withControlPanel: true
         };
 
         /**
-         * Set settings
-         * @param o {object} - data
-         * @return {Boolean}
+         * Settings
+         * @type {Object}
          */
         _public.setSettings = function(o)
         {
             pet.extend(_private.options, o);
-            return true;
         };
-        /**
-         * Get settings
-         * @param key {string)
-         * @return {strign} - result
-         */
         _public.getSettings = function(key)
         {
             return _pet.options[key];
@@ -155,7 +148,7 @@
                     window.attachEvent('onload', ready);
                 /*  else
                  window.onload=ready
-                 */ // No conflict
+                 */
 
             },
             loaded: function()
@@ -221,8 +214,10 @@
                 // Hang on popstate event triggered by pressing back/forward in browser
                 window.onpopstate = function( e ) {
 
-                    // Receiving location from the window.history object
-                    var loc = history.location.pathname || document.location.pathname;
+                    // Get location object
+                    var location = window.history.location || window.location;
+
+                    var loc = location.pathname;
 
                     _pet.data.withControlPanel = true;
 
@@ -250,7 +245,10 @@
                 else if ( typeof href === 'string' )
                     loc = href;
                 else
-                    return;
+                    return true;
+
+                if (typeof(event) !== 'undefined')
+                    event.preventDefault();
 
                 var urlExp = new RegExp('^(https?\:\/\/'+(window.location.host).replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")+')','i');
                 loc = loc.replace(urlExp, '');
@@ -264,7 +262,9 @@
                 _pet.data.withControlPanel = false;
 
                 _pet.router.search(loc, true);
-                return false;
+
+                if (typeof(event) === 'undefined')
+                    return false;
             },
             withControlPanel: function()
             {
@@ -292,17 +292,14 @@
                     if (typeof(_pet.data.lastQuery.abortOption) === 'function')
                         _pet.data.lastQuery.abortOption();
 
-                    if (_pet.data.breakRequest.breakTo !== false)
-                    {
-                        // Clear control data
-                        var control = _pet.getControl(_pet.data.breakRequest.breakTo);
-                        _pet.router.options.loc = _pet.data.breakRequest.breakTo;
-                        _pet.router.options.collection = control.collection;
-                        _pet.router.options.param = control.param;
+                    // Clear control data
+                    var control = _pet.getControl(_pet.data.breakRequest.breakTo);
+                    _pet.router.options.loc = _pet.data.breakRequest.breakTo;
+                    _pet.router.options.collection = control.collection;
+                    _pet.router.options.param = control.param;
 
-                        // Save last location
-                        _pet.data.breakRequest.lastLocation = pet.router.getLocation();
-                    }
+                    // Save last location
+                    _pet.data.breakRequest.lastLocation = pet.router.getLocation();
                 }
 
                 // Set control data
@@ -445,6 +442,18 @@
             getLocation: function()
             {
                 return _pet.router.options.loc;
+            },
+            getGet: function()
+            {
+                // Todo: use cache data
+                var $_GET = {};
+                var __GET = window.location.search.substring(1).split("&");
+                for(var i=0; i<__GET.length; i++)
+                {
+                    var getVar = __GET[i].split("=");
+                    $_GET[getVar[0]] = typeof(getVar[1])=="undefined" ? "" : getVar[1];
+                }
+                return $_GET;
             }
         };
 
@@ -464,7 +473,7 @@
         /**
          * Add collection
          * @param name (string) - name of collection
-         * @param obj (object) - (events)
+         * @param o (object) - options
          */
         _public.addCollection = function(name, obj)
         {
@@ -516,7 +525,7 @@
         };
 
         /**
-         * Debug
+         * Debuger
          * @param msg {string} - message
          */
         _public.debug = function(msg)
@@ -544,7 +553,6 @@
                 var type            = o.type ? (o.type.toUpperCase()) : 'GET';
                 var url             = o.url || false;
                 var headers         = o.headers || [];
-                var nav             = o.nav ? true : false;
                 var data            = o.data || false;
                 var dataType        = o.dataType || 'txt';
                 var onError         = o.error || function(){};
@@ -671,13 +679,11 @@
                         _pet.data.lastQuery = request;
                         _pet.data.lastQuery.finish = false;
                         _pet.data.lastQuery.abortOption = o['abort'];
-                        if (nav)
-                            _pet.data.breakRequest.breakTo = _pet.data.breakRequest.lastLocation;
-                        else
-                            _pet.data.breakRequest.breakTo = false;
+                        _pet.data.breakRequest.breakTo = _pet.data.breakRequest.lastLocation;
                     }
                 }
-                catch (e) {
+                catch (e)
+                {
                     if (_private.options.debug)
                         throw e;
                     else
@@ -713,7 +719,7 @@
         /**
          * Encode data to POST (step 2)
          * @param data
-         * @return {string}
+         * @return {String}
          */
         _private.ajaxUrlEncodeDataStep2 = function(key, data)
         {
@@ -735,7 +741,7 @@
         };
         /**
          * Parse JSON
-         * @param {string} - data - JSON
+         * @param {String} - data - JSON
          */
         _private.parseJSON = function(data)
         {
@@ -765,7 +771,6 @@
          * Extend function
          * @param Child {object} - child object
          * @param Parent {object} - parent object
-         * Todo: !!!
          */
         _public.extend = function(Child, Parent)
         {
