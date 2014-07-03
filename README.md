@@ -3,8 +3,21 @@ PetJS
 
 Router of ajax applications, HTML5 history API expansion for browsers who not supporting it.
 
+Installing
+----
+
+#### npm
+```sh
+npm install petjs
+```
+
+#### Bower
+```sh
+bower install petjs
+```
+
 Getting Started
-=========
+----
 
 >At the stage of filling...
 
