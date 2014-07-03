@@ -1,6 +1,6 @@
 {
   "name": "petjs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Router of ajax applications, HTML5 history API expansion for browsers who not supporting it",
   "homepage": "https://github.com/Peteychuk/petjs",
   "author": {
