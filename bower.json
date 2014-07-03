@@ -1,7 +1,7 @@
 {
-    "name": "PetJS",
+    "name": "petjs",
     "version": "0.1.0",
-    "homepage": "https://github.com/Peteychuk/PetJS",
+    "homepage": "https://github.com/peteychuk/petjs",
     "author": {
         "name": "Yaroslav Peteychuk",
         "url": "http://www.peteychuk.com/"
@@ -11,7 +11,7 @@
     "scripts": ["history.js"],
     "repository": {
         "type": "git",
-        "url": "https://github.com/Peteychuk/PetJS.git"
+        "url": "https://github.com/peteychuk/petjs.git"
     },
     "licenses": [{
         "type": "GPL3"
