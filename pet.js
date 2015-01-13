@@ -466,7 +466,7 @@
             var loc = document.location.pathname;
             var control = _pet.getControl(loc);
             _pet.router.options.loc = loc;
-            _pet.router.options.collection = control.collection;
+            _pet.router.options.collection = _pet.collection.hasOwnProperty(control.collection) ? control.collection : _pet.options.collection404 || control.collection;
             _pet.router.options.param = control.param;
         };
 
